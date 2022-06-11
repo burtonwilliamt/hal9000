@@ -2,6 +2,9 @@ from settings import BOT_TOKEN, GUILD_ID
 from typing import Sequence, Iterable
 import discord
 import asyncio
+import json
+import http.client
+import urllib.parse
 
 
 class RoleSelection(discord.ui.Select):
@@ -145,5 +148,25 @@ async def monkey(ctx, user: discord.User):
     print(f'Someone wanted to monkey {user.display_name}')
     await ctx.respond()
 
+
+@bot.slash_command(guild_ids=[GUILD_ID])
+async def ud(ctx, term: discord.commands.Option(str)):
+    conn = http.client.HTTPSConnection('api.urbandictionary.com')
+    encoded_term = urllib.parse.quote(term, safe='')
+    conn.request('GET', f'/v0/define?term={encoded_term}')
+    res = conn.getresponse()
+
+    data_bytes = res.read()
+    if len(data_bytes) == 0:
+        ctx.respond('Failed to get a definition')
+    data = json.loads(data_bytes.decode('utf-8'))
+    the_list = data['list']
+    first_result = the_list[0]
+
+    word = first_result['word']
+    permalink = first_result['permalink']
+    definition = first_result['definition'].replace(r'\r\n', '\n')
+    e = discord.Embed(description=f'[{word}]({permalink})\n\n' + definition)
+    await ctx.respond(embed=e)
 
 bot.run(BOT_TOKEN)
