@@ -1,10 +1,11 @@
+"""Tests for the BoF."""
 import unittest
 from unittest import mock
 import discord
 import src.cogs.bureau_of_fun
 
 
-class TestBof(unittest.IsolatedAsyncioTestCase):
+class BofTest(unittest.IsolatedAsyncioTestCase):
 
   def setUp(self):
     self.bot = mock.create_autospec(discord.Bot, instance=True)

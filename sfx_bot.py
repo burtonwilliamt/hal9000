@@ -1,3 +1,9 @@
+"""Experimental implementation of the SFX bot.
+
+This bot allows multiple sound files to be playing simultaneously.
+
+Another notable change is the implementation of slash commands on this bot.
+"""
 import datetime
 import subprocess
 import discord
@@ -25,12 +31,10 @@ async def introduce(ctx,
   end_time = 5000
 
   # Set the start time.
-  ffmpeg_options += ' -ss {}'.format(
-      datetime.timedelta(milliseconds=start_time))
+  ffmpeg_options += f' -ss {datetime.timedelta(milliseconds=start_time)}'
 
   # Set the duration.
-  ffmpeg_options += ' -t {}'.format(
-      datetime.timedelta(milliseconds=end_time - start_time))
+  ffmpeg_options += f' -t {datetime.timedelta(milliseconds=end_time - start_time)}'
 
   track = discord.FFmpegOpusAudio(
       '/mnt/c/Users/William/Desktop/youtube-rb94S_HIfXw-Meet_The_Sniper_Theme_Song_Fixed_Version.m4a',
@@ -90,7 +94,6 @@ current_sfx = None
 
 @bot.slash_command(guild_ids=[GUILD_ID])
 async def play_track(ctx):
-  global the_input_pipe
   global current_sfx
   if current_sfx is not None:
     current_sfx.terminate()

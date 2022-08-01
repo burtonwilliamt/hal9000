@@ -1,9 +1,11 @@
+"""Actions for managing roles, channels, and other discord settings."""
 import discord
 
 import settings
 
 
 class RoleSelection(discord.ui.Select):
+  """Provides a selection of available roles."""
 
   def __init__(self, user: discord.Member):
     all_roles = user.guild.roles

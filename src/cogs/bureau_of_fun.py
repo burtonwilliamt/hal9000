@@ -1,3 +1,8 @@
+"""A collection of silly features.
+
+These tend to be one-off, simple commands. If something becomes more complicated
+than a single command consider moving it into a separate file.
+"""
 import json
 import http.client
 import urllib.parse

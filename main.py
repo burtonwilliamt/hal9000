@@ -1,3 +1,4 @@
+"""The main file for launching the bot."""
 import discord
 from settings import BOT_TOKEN
 import src.cogs.bureau_of_administration

@@ -1,3 +1,4 @@
+"""Features that allow users to vote, poll, or ask questions."""
 from typing import Iterable
 import discord
 
@@ -5,6 +6,7 @@ import settings
 
 
 class PollData:
+  """The state of a Poll, tracks the users that responded to each option."""
 
   def __init__(self, options: Iterable[str]):
     # A mapping from option to a set of user ids that have responded for

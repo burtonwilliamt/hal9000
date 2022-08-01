@@ -33,7 +33,7 @@ jobs:
         # Lint everything in src, and also all top level .py files.
         # We can't just use ./ because the root dir is not a python module (it
         # doesn't have a __init__.py file.)
-        pylint --rcfile=.pylintrc src/ *.py
+        pylint --rcfile=.pylintrc src/ *.py --disable=C0301
     - name: Run unittest discover
       run: |
         python -m unittest discover -p *_test.py -v
