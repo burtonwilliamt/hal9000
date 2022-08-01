@@ -1,8 +1,8 @@
+import discord
 from settings import BOT_TOKEN
 import src.cogs.bureau_of_administration
 import src.cogs.bureau_of_fun
 import src.cogs.bureau_of_voting
-import discord
 
 bot = discord.Bot()
 
