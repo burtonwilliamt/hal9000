@@ -28,6 +28,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Create settings.py for testing
+      run: |
+        cp default_settings.py settings.py
     - name: Lint with pylint
       run: |
         # Lint everything in src, and also all top level .py files.
